@@ -2,13 +2,13 @@
   <div class="container">
     <a class="navbar-brand">conduit</a>
     <ul class="nav navbar-nav pull-xs-right">
-      <li class="nav-item">
-        <a class="nav-link">
+      <li class="nav-item" routerLinkActive="active">
+        <a [routerLink]="['/create']"  class="nav-link">
           <i class="ion-compose"></i>&nbsp;New Post
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link">Sign in</a>
+        <a  [routerLink]="['/login']" class="nav-link">Sign in</a>
       </li>
     </ul>
   </div>
