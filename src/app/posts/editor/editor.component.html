@@ -20,8 +20,8 @@
                   </li>
                 </ul>
 
-                <span class="label label-pill label-default" *ngFor="let tag of tags.controls">
-                    <i class="ion-close-round"></i> {{ tag.value }}</span>
+                <span class="label label-pill label-default" *ngFor="let tag of tags.controls; let index = index">
+                    <i class="ion-close-round" (click)="removeTag(index)"></i> {{ tag.value }}</span>
 
               <!-- <span class="label label-pill label-default">
                 <i class="ion-close-round"></i> programming</span>

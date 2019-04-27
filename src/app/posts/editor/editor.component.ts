@@ -40,4 +40,8 @@ export class EditorComponent implements OnInit {
     tagInput.value = '';
     tagInput.focus();
   }
+
+  removeTag(index: number) {
+    this.tags.removeAt(index);
+  }
 }
