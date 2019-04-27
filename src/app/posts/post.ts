@@ -16,3 +16,7 @@ export interface Article {
   updatedAt: string;
   author: string;
 }
+
+export interface ArticleTitleExist {
+  titleExist: boolean;
+}

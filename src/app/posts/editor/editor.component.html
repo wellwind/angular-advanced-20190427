@@ -6,6 +6,12 @@
         <form [formGroup]="form">
           <fieldset class="form-group">
             <input class="form-control form-control-lg" type="text" placeholder="Post Title" formControlName="title">
+
+            {{ form.get('title').errors | json }}
+
+            <span *ngIf="titleExist$ | async">
+              標題已存在，要換換嗎？
+            </span>
           </fieldset>
           <fieldset class="form-group">
             <textarea class="form-control" rows="8" placeholder="Write your post (in markdown)" formControlName="body"></textarea>
@@ -31,7 +37,7 @@
                 <i class="ion-close-round"></i> webdev</span> -->
             </div>
           </fieldset>
-          <button type="button" class="btn btn-lg btn-primary pull-xs-right" (click)="submit()">
+          <button type="button" class="btn btn-lg btn-primary pull-xs-right" [disabled]="form.invalid" (click)="submit()">
             Create Post
           </button>
         </form>

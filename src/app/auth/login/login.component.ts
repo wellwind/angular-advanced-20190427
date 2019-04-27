@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { LoginError, User, UserProfile } from '../user';
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {}
 
@@ -56,8 +56,9 @@ export class LoginComponent implements OnInit {
           // return of(null);
         })
       )
-      .subscribe(data => {
-        this.router.navigateByUrl('/');
+      .subscribe((data: UserProfile) => {
+        localStorage.setItem('token', data.user.token);
+        this.router.navigateByUrl(this.route.snapshot.queryParamMap.get('redirect'));
       });
 
   }
