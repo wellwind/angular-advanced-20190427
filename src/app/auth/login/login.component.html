@@ -5,16 +5,28 @@
       <div class="col-md-6 col-md-offset-3 col-xs-12">
         <h1 class="text-xs-center">Sign in</h1>
 
-        <form>
+        <form #loginForm="ngForm">
           <fieldset class="form-group">
-            <input name="email" class="form-control form-control-lg" type="text" placeholder="Email" required email [(ngModel)]="user.email">
+            <input name="email" class="form-control form-control-lg" type="text" placeholder="Email" required email [(ngModel)]="user.email" #email="ngModel">
+            <span *ngIf="email.invalid && email.dirty">
+              <span *ngIf="email.errors['required']">
+                email 為必填
+              </span>
+              <span *ngIf="email.errors['email']">
+                  格式錯誤
+                </span>
+            </span>
           </fieldset>
 
           <fieldset class="form-group">
             <input name="password" class="form-control form-control-lg" type="password" placeholder="Password"
-              minlength="4" required [(ngModel)]="user.password">
+               required minlength="4" [(ngModel)]="user.password" #password="ngModel">
+               <!-- {{ password.errors | json }} -->
+               <span *ngIf="password.invalid && password.errors['minlength']">
+                 {{ password.errors['minlength']['actualLength'] }} / {{ password.errors['minlength']['requiredLength'] }}
+               </span>
           </fieldset>
-          <button class="btn btn-lg btn-primary pull-xs-right" (click)="login()">
+          <button class="btn btn-lg btn-primary pull-xs-right" [disabled]="loginForm.invalid" (click)="login()">
             Sign in
           </button>
         </form>
