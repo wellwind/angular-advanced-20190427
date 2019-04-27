@@ -31,12 +31,12 @@ export class EditorComponent implements OnInit {
 
   addTags(tagInput: HTMLInputElement) {
     tagInput.value.split(',')
-    .map(tagName => tagName.trim())
-    .filter(tagName => !!tagName)
-    .filter(tagName => (this.tags.value as string[]).indexOf(tagName) === -1)
-    .forEach(tagName => {
-      this.tags.push(new FormControl(tagName));
-    });
+      .map(tagName => tagName.trim())
+      .filter(tagName => !!tagName)
+      .filter(tagName => (this.tags.value as string[]).indexOf(tagName) === -1)
+      .forEach(tagName => {
+        this.tags.push(new FormControl(tagName));
+      });
     tagInput.value = '';
     tagInput.focus();
   }
