@@ -3,25 +3,35 @@
     <div class="row">
 
       <div class="col-md-10 col-md-offset-1 col-xs-12">
-        <form>
+        <form [formGroup]="form">
           <fieldset class="form-group">
-            <input class="form-control form-control-lg" type="text" placeholder="Post Title">
+            <input class="form-control form-control-lg" type="text" placeholder="Post Title" formControlName="title">
           </fieldset>
           <fieldset class="form-group">
-            <textarea class="form-control" rows="8" placeholder="Write your post (in markdown)"></textarea>
+            <textarea class="form-control" rows="8" placeholder="Write your post (in markdown)" formControlName="body"></textarea>
           </fieldset>
           <fieldset class="form-group">
-            <input class="form-control" type="text" placeholder="Enter tags">
+            <input class="form-control" type="text" placeholder="Enter tags" #tagInput (keyup.enter)="addTags(tagInput)">
             <div class="tag-list">
-              <span class="label label-pill label-default">
+
+                <ul formArrayName="tags">
+                  <li *ngFor="let tag of tags.controls; let index = index">
+                    <input class="form-control" type="text" [formControlName]="index">
+                  </li>
+                </ul>
+
+                <span class="label label-pill label-default" *ngFor="let tag of tags.controls">
+                    <i class="ion-close-round"></i> {{ tag.value }}</span>
+
+              <!-- <span class="label label-pill label-default">
                 <i class="ion-close-round"></i> programming</span>
               <span class="label label-pill label-default">
                 <i class="ion-close-round"></i> javascript</span>
               <span class="label label-pill label-default">
-                <i class="ion-close-round"></i> webdev</span>
+                <i class="ion-close-round"></i> webdev</span> -->
             </div>
           </fieldset>
-          <button type="button" class="btn btn-lg btn-primary pull-xs-right">
+          <button type="button" class="btn btn-lg btn-primary pull-xs-right" (click)="submit()">
             Create Post
           </button>
         </form>
